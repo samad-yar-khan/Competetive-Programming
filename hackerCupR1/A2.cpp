@@ -67,8 +67,8 @@ int main(){
         up.push_back(si[0]+1);
         for(int j = 1 ;j<si.size() ; j++ ){
 
-            up.push_back(si[j]-si[j-1]);
-            down.push_back(ei[j]-ei[j-1]);
+            up.push_back((si[j]-si[j-1] +modVal)%modVal);
+            down.push_back((ei[j]-ei[j-1]+modVal)%modVal);
 
         }
         down.push_back(((S.length()%modVal)-(ei[ei.size()-1]%modVal) + modVal)%modVal);

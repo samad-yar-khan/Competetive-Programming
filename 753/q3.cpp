@@ -1,13 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define ll long long int
 #define modVal 10e9
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
- 
- 
+
+
+
+
+
 int main(){
  
     ios_base::sync_with_stdio(false);
@@ -19,15 +22,28 @@ int main(){
    
     int T= 0 ;
     cin>>T;
-    
-    int arr[100001] = {0};
+ 
     while(T--){ 
-        
-       ll x = 0 , y = 0 ;
-       cin>>x>>y;
 
-    }    
+        int n =0;
+        cin>>n;
+        vector<ll> vec(n,0);
+        for(int i =0;i<n ; i++){
+            ll a =0;
+            cin>>a;
+            vec[i] = a;
+        }
+        if(n==1){
+            cout<<vec[0]<<"\n";continue;
+        }
+        sort(vec.begin() , vec.end());
+        ll ans=vec[0];
+        for(int i = 0 ; i< vec.size()-1 ;i++){
+            ans = max(ans ,vec[i+1]-vec[i] );
+        }
+        cout<<ans<<"\n";
+
+        
+    }
+   return 0;
 }
-  
- 
- 

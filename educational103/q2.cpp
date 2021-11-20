@@ -1,53 +1,65 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define lld long double
+#include<bits/stdc++.h>
 #define ll long long
+using namespace std;
 
-int main()
-{
+
+
+int main(){
+
     ios_base::sync_with_stdio(false);
- 
-    cin.tie(NULL);
- 
+    cin.tie(NULL);cout.tie(NULL);
+    #ifndef ONLINE_JUDGE
+        freopen("../input.txt", "r" , stdin);
+        freopen("../output.txt", "w", stdout);
+    #endif
 
-    int T{1};
-    cin>>T;
+    int T =0;cin>>T;
 
-
-
-    while(T>0){
-
-        int n = 0  ;
-        lld k = 0;
-    
+    while(T--){
+        
+        ll n = 0 ; ll k=0;
         cin>>n>>k;
-        lld z = k/100;
-        vector<lld> arr;
-        for(int i= 0; i < n  ; i++){
-            lld temp=0;
-            cin>>temp;
-            arr.push_back(temp);
+        ll sum=0;
+        vector<ll>vec(n , 0);
+
+        for(int i =0;i<n ; i++){
+            cin>>vec[i];
         }
+      
+        ll presum =vec[0];
+        ll changes =0;
+        for(int i =1 ;i<n;i++){
 
-        ll den = arr.at(0);
-        ll adds = 0;
-        for(int i = 1 ; i < n ; i++){
+            ll p=vec[i]*100;
+            ll den = presum;
 
-            lld dev = arr.at(i)/(lld)den;
-            if(dev <= z){
-                den+=arr.at(i);
-            }else{
-                lld f = ceil((arr.at(i)/z) - (lld)den);//f jitna add karna hai
-                den+=arr.at(i);
-                den+=f;
-                adds+=f;
+            ll perc = p/den;
+            if(p%den != 0){
+                perc++;
+            }
+            // cout<<perc<<" ";
+            if(perc > k){
+                
+                ll c = (p/k) - presum;
+                ll newP = p/(den+c);
+                if(p%(den+c)!=0){
+                    newP++;
+                }
+                if(newP >k){
+                    c++;
+                }
+                presum+=c;
+                changes +=c;
+
             }
 
+            presum+=vec[i];
+
         }
 
-        cout<<adds<<"\n";
-       T--; 
+        cout<<changes<<'\n';
     }
- 
+
     return 0;
+   
 }

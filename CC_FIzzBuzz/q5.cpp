@@ -22,7 +22,85 @@ int main(){
     cin>>T;
    
     while(T--){ 
+        
+        int N=0,M=0;
+        cin>>N>>M;
+        set<pair<int,int>>sets;
+        vector<vector<int>> disc(N+1 , vector<int>(0));
+        for( int i =0;i<M ; i++){
+            int  a=0;
+            int b =0;
+            cin>>a>>b;
+            if(a==b){
+                continue;
+            }
+            pair<int,int>p(min(a,b),max(a,b));
+            if(sets.count(p)){
+                continue;
+            }
+            sets.insert(p);
+            disc[a].push_back(b);
+            disc[b].push_back(a);
 
-    }
+        }
+
+        vector<bool> vis(N+1,false);
+        // vector<pair<int,int>>data(N+1 , {0,0});
+
+        int comp=0;
+        vector<vector<int>>comps;
+        for(int i =1 ;i<=N;i++){
+            if(!vis[i]){
+                
+                int z =0;
+                queue<int>pn;
+                vector<int>comp;
+                pn.push(i);
+                while(!pn.empty()){
+                    int t=pn.front();
+                    pn.pop();
+                    z++;
+                    vis[t]=true;
+                    for(int j=0;j<disc[t].size();j++){
+                        if(!vis[disc[t][j]]){
+                            pn.push(disc[t][j]);
+                            vis[disc[t][j]]=true;
+                        }
+                    }
+                    comp.push_back(t);
+                }
+                comps.push_back(comp);
+            }
+        }
+       int ways =0;
+    //    cout<<comps.size()<<" ";
+       if(comps.size()<=1){
+           cout<<ways<<"\n";
+           continue;
+       }
+       for(int i =0;i<comps.size();i++){
+           int s = comps[i].size()-1;
+        //    cout<<s<<' ';
+           bool yes=true;
+           for(int j=0;j<comps[i].size();j++){
+               if(disc[comps[i][j]].size()!=s){
+                //    for(int k=0;k<comps[i].size();k++){
+                //        cout<<comps[i][k]<<"-";
+                //    }
+                //    cout<<"\n";
+                //    cout<<disc[comps[i][j]].size()<<" "<<s;
+                   yes=false;
+                   break;
+               }
+           }
+           if(yes){
+               ways++;
+           }
+       }
+       cout<<ways<<"\n";
+        
+
+
+    }   
    
 }

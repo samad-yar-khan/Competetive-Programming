@@ -45,9 +45,9 @@ int main(){
         }
 
         vector<bool> vis(N+1,false);
-        // vector<pair<int,int>>data(N+1 , {0,0});
 
         int comp=0;
+        //BFS
         vector<vector<int>>comps;
         for(int i =1 ;i<=N;i++){
             if(!vis[i]){
@@ -73,22 +73,17 @@ int main(){
             }
         }
        int ways =0;
-    //    cout<<comps.size()<<" ";
+ 
        if(comps.size()<=1){
            cout<<ways<<"\n";
            continue;
        }
        for(int i =0;i<comps.size();i++){
            int s = comps[i].size()-1;
-        //    cout<<s<<' ';
+       
            bool yes=true;
            for(int j=0;j<comps[i].size();j++){
                if(disc[comps[i][j]].size()!=s){
-                //    for(int k=0;k<comps[i].size();k++){
-                //        cout<<comps[i][k]<<"-";
-                //    }
-                //    cout<<"\n";
-                //    cout<<disc[comps[i][j]].size()<<" "<<s;
                    yes=false;
                    break;
                }

@@ -1,27 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long 
-#define modVal 10e9+7
+#define modVal 1000000007
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 
-class trip
-{
-
-    public :
-        ll l;
-        ll r;
-        ll x;
-};
-
-bool comp(trip a , trip b){
-    if(a.r!=b.r){
-        return a.r<b.r;
-    } 
-    return a.l<b.l;
-}
 
 int main(){
  
@@ -39,20 +24,23 @@ int main(){
 
         ll n =0 , m=0;
         cin>>n>>m;
-        vector<trip> vec;
+        vector<ll> vec;
+        ll total_or = 0 ;
         for(int i =0;i< m ;i++){
             ll l=0,r=0,x=0;
             cin>>l>>r>>x;
-            trip t;
-            t.l=l;
-            t.r=r;
-            t.x=x;
-            vec.push_back(t);
+            vec.push_back(x);
+            total_or=(total_or|x);
         }
-        sort(vec.begin(),vec.end(),comp);
-        for(int i =0;i< m ;i++){
-            cout<<vec[i].l<<" "<<vec[i].r<<" "<<vec[i].x<<"\n";
+        ll one =1;
+        ll p=1;
+
+        for(int i =0;i<n-1 ;i++){
+            p=(p*2)%modVal;
         }
+
+        ll ans=(p%modVal)*(total_or%modVal) % modVal  ;
+        cout<<ans<<"\n";
        
     }
    

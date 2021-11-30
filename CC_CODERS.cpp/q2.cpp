@@ -35,7 +35,7 @@ int main(){
             s2.insert(s[i]);    
         }
 
-        if(s2.size()>0 && K==0){
+        if(s2.size()>1 && K==0){
             cout<<-1<<"\n";
             continue;
         }
@@ -47,70 +47,59 @@ int main(){
             c.push_back(N);
         }
 
-        int ans =0;
+        ll ans =0;
         for(int i =0 ;i<26 ;i++){
-
+            int KT=K;
             char curr = c[i];
-            priority_queue<int>pn;
-            int counts=0;
-            for(int i=0;i<N;i++){
-                if(s[i]==c[i]){
-                    counts++;
-                }
-            }
-            
-            if(counts==0){
-                continue;
-            }
 
-            int j=0;
-
-            while(j<N && s[j]!=curr){
-                j++;
-            }   
-            int k=K;
-            if(j>0){
-                k--;
+            int lenP =0;
+            while(lenP<N && s[lenP]==curr){   
+                lenP++;
             }
-            j=N-1;
-            while(j>=0 && s[j]!=curr){
+            int lenS =0;
+            int j = N-1;
+            while(j>=0 && s[j]==curr){   
+                lenS++;
                 j--;
             }
-            if(j<N-1){
-                k--;
-            }
 
-            j=0;
 
-            while(j<N){
-                int k =j;
-                int c2=0;
-                if(s[j]==curr){
-                    while(s[k]==curr){
-                        k++;
-                        c2++;
+            int k = lenP;
+            priority_queue<int>pq;
+            while(k <= j){
+              
+                if(s[k] == curr){
+                    int x = k; 
+                    int c2=0;
+                    while(s[x] == curr){
+                        c2++;x++;
                     }
-                    j=k;
-                    pn.push(c2);
+                    k=x;
+                    pq.push(c2);
                 }else{
-                    j++;
+                    k++;
                 }
             }
 
-            int temp =0;
-            while(pn.size()>0 && k>0){
-                temp+=(pn.top());
-                pn.pop();
+            int mids =0;
+            // cout<<pq.size()<<","<<K<<" \n";
+           KT--;
+            while(KT>0 && pq.size() >0){
+                mids+=pq.top();
+                pq.pop();
+                KT--;
             }
+            ll a2 =lenP+lenS+mids;
+            ll an =  min(N , a2);
+            ans = max(an , ans);
+         
 
-            ans = max(ans,temp);
 
         }
 
         cout<<ans<<"\n";
 
-
-
     }
    
 }
+

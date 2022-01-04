@@ -28,6 +28,8 @@ ll exp(ll m , ll n){    //m^n
 }
 
 
+
+
 int main(){
      
     ios_base::sync_with_stdio(false);
@@ -39,29 +41,34 @@ int main(){
    
     int T=0;cin>>T;
     while(T--){
-    int n=0; ll x=0;cin>>n>>x;
-    ll*arr=new ll[n];
-    ll m =0;
-    ll  M=0;
-    
-    for(int i =0;i<n ;i++){
-       cin>>arr[i];
-       ll ads=arr[i]/x;
-       if(arr[i]%x!=0){
-           ads++;
-       }
-       M+=ads;
-       m+=arr[i];
-   }    
+        ll  a=0,b=0;
+        cin>>a>>b;
+        ll c=0;
 
-   
-    ll a2 = m/x;
-    if(m%x!=0){
-        a2++;
-    }
-    cout<<a2<<" "<<M<<"\n";
-    delete [] arr;
-
+        if(a>b){
+            while(a>b){
+                if(a/b <= b){
+                    a/=b;
+                }else{
+                    if((a/b)/b < a/(b+1)){
+                        a=(a/b);
+                        c+=1;
+                    }else{
+                        b+=1;
+                        c++;
+                    }
+                }
+            }
+        }
+        if(a==0){
+            ;
+        }
+        else if(a==b){
+            c+=2;
+        }else{
+            c+=1;
+        }
+        cout<<c<<"\n";
     }
     
    

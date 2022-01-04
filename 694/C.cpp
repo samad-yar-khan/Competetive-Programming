@@ -39,29 +39,33 @@ int main(){
    
     int T=0;cin>>T;
     while(T--){
-    int n=0; ll x=0;cin>>n>>x;
-    ll*arr=new ll[n];
-    ll m =0;
-    ll  M=0;
-    
-    for(int i =0;i<n ;i++){
-       cin>>arr[i];
-       ll ads=arr[i]/x;
-       if(arr[i]%x!=0){
-           ads++;
-       }
-       M+=ads;
-       m+=arr[i];
-   }    
+        
+        int n =0,m=0;
+        cin>>n>>m;
+        vector<int> friends(n,0);
+        vector<pair<int,int>> presents(m,{0,0});
+        for(int i =0;i<n;i++){
+            cin>>friends[i];
+        }
+        sort(friends.begin(),friends.end());
+        reverse(friends.begin(),friends.end());
 
-   
-    ll a2 = m/x;
-    if(m%x!=0){
-        a2++;
-    }
-    cout<<a2<<" "<<M<<"\n";
-    delete [] arr;
-
+        for(int i =0;i<m;i++){
+            cin>>presents[i].first;
+        }
+        int i=0;
+        int j =0;
+        ll sum=0;
+        while(i<n){
+            if(presents[friends[i]-1].first<=presents[j].first || j>=m){
+                sum+=presents[friends[i]-1].first;
+            }else{
+                sum+=presents[j].first;
+                j++;
+            }
+            i++;
+        }
+        cout<<sum<<'\n';
     }
     
    

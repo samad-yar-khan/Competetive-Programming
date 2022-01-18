@@ -24,7 +24,67 @@ int main(){
     int T=0;cin>>T;
     while(T--){
 
-            
+        ll a1=0,b1=0,c1=0;
+        cin>>a1>>b1>>c1;
+        ll a2=0,b2=0,c2=0;
+        cin>>a2>>b2>>c2;
+        ll ans =0;
+        if(c1 >=  b2){
+            ans+=(b2*2);
+           
+            c1-=b2;
+             b2=0;
+        }else{
+            ans+=(c1*2);
+           
+            b2-=c1;     
+             c1=0;   
+        }
+
+        if(c1 >= c2  ){
+            c1-=c2;
+            c2=0;
+        }else{
+            c2-=c1;
+            c1=0;
+        }
+        if(c1 >= a2){
+            c1-=a2;
+            a2=0;
+        }else{
+            a2-=c1;
+            c1=0;
+        }
+
+
+        if(b1>=b2){
+            b1-=b2;
+            b2=0;
+        }else{
+            b2-=b1;
+            b1=0;
+        }
+
+        if(b1>=a2){
+            b1-=a2;
+            a2=0;
+        }else{
+            a2-=b1;
+            b1=0;
+        }
+
+        if(b1>=c2){
+            ans-=(c2*2);
+        }else{
+            ans-=(b1*2);
+        }
+        cout<<ans<<"\n";
+
+        
+
+
+
+
 
     }
 }

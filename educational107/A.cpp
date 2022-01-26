@@ -8,6 +8,8 @@ using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 long long const modVal = 1000000007;
 
+
+//Binary Search
 // int binarySearch(vector<ll> vec,ll si , ll ei ,  ll t){
 
 //     while(si<=ei){
@@ -30,6 +32,8 @@ long long const modVal = 1000000007;
 
 // }
 
+//Power
+
 // int power( int n , int k){
 
 //     int a = n;
@@ -45,6 +49,8 @@ long long const modVal = 1000000007;
 //     return ans;
 
 // }
+
+//Root
 
 // int KthRoot(int n , int k){
 //     int si = 1;
@@ -73,6 +79,7 @@ long long const modVal = 1000000007;
 // }
 
 
+//Seive
 // void makeSeive(vector<bool>&seive , int range , vector<int>& primes ){
 
 //     seive[0] = 0 ;//np
@@ -89,12 +96,18 @@ long long const modVal = 1000000007;
 //     }
 // }
 
+
+//GCD
+
 // ll gcd(ll a, ll b)
 // {
 //     if (a == 0)
 //         return b;
 //     return gcd(b % a, a);
 // }
+
+
+//Sum of digits 
 
 // ll sd(ll n){
 //     ll a=0;
@@ -107,21 +120,22 @@ long long const modVal = 1000000007;
 //     return a;
 // }
 
+//Palindrome Checker
 
-bool isPalindrome(string &a ){
+// bool isPalindrome(string &a ){
 
-    int i =0;
-    int j =a.length()-1;
+//     int i =0;
+//     int j =a.length()-1;
 
-    while(i<=j){
-        if(a[i]!=a[j]){
-            return false;
-        }
-        i++;j--;
-    }
+//     while(i<=j){
+//         if(a[i]!=a[j]){
+//             return false;
+//         }
+//         i++;j--;
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 
 
@@ -140,172 +154,20 @@ int main(){
    
     while(T--){
 
+        int  n =0 ;cin>>n;
 
-        int n =0;cin>>n;
-        vector<string> scenes(n+1);
-        unordered_map<string,int>maps;
-         unordered_map<string,int>len2;
-        bool won =false;
-
+        vector<int>vec(n,0);
+        int ans =0;
         for(int i=0;i<n;i++){
-            string a;cin>>a;
-            scenes[i] =a;
-            if(isPalindrome(a)){
-                won = true;
-            }
-            reverse(a.begin(),a.end());
-            // cout<<a<<"\n";
-            if(maps.count(a)==0){
-                maps.insert(make_pair(a,i));
-            }else{
-                maps[a] =i;
-            }
 
-            if(a.length() == 2){
-                if(len2.count(a)==0){
-                    len2.insert(make_pair(a,i));
-                }else{
-                    len2[a] =i;
-                }
+            cin>>vec[i];
+            if(vec[i]==1||vec[i]==3){
+                ans++;
             }
-           
-            if(a.length()==3){
-                if(maps.count(a.substr(0,2))==0){
-                    maps.insert(make_pair(a.substr(0,2),i));
-                }else{
-                    maps[a.substr(0,2)] = i;
-                }
-            }
-        }   
+         }
+        cout<<ans<<"\n";
 
-        if(won){
-            cout<<"YES\n";continue;
-        }
-
-        // for(auto i =maps.begin();i!=maps.end();i++){
-        //     cout<<i->first<<" "<<i->second<<"\n";
-        // }
-        for(int i =0;i<n;i++){
-            if(maps.count(scenes[i]) == 1 && maps[scenes[i]] > i){
-                won = true;
-                break;
-            }
-            if(scenes[i].length()==3 && len2.count(scenes[i].substr(0,2)) == 1 && len2[scenes[i].substr(0,2)] > i){
-                won = true;
-                break;
-            }
-        }
-
-        if(won){
-            cout<<"YES\n";
-        }else{
-            cout<<"NO\n";
-        }
 
       
     }
 }
-
-
-/*
-YES
-NO
-NO
-YES
-NO
-YES
-YES
-NO
-YES
-YES
-YES
-NO
-NO
-YES
-NO
-YES
-YES
-NO
-YES
-NO
-YES
-NO
-NO
-YES
-YES
-NO
-YES
-NO
-NO
-NO
-NO
-YES
-YES
-YES
-NO
-NO
-YES
-YES
-YES
-YES
-NO
-NO
-YES
-NO
-NO
-NO
-NO
-YES
-YES
-YES
-NO
-NO
-YES
-NO
-YES
-NO
-YES
-YES
-YES
-NO
-YES
-NO
-NO
-YES
-NO
-YES
-YES
-NO
-NO
-YES
-NO
-YES
-NO
-YES
-NO
-NO
-NO
-NO
-NO
-NO
-YES
-YES
-NO
-YES
-YES
-NO
-NO
-YES
-NO
-YES
-YES
-YES
-NO
-NO
-NO
-YES
-NO
-NO
-NO
-YES
-*/

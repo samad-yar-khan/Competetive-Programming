@@ -109,6 +109,14 @@ ll sd(ll n){
 
 
 
+bool isPOfTwo(int n)
+{
+   if(n==0)
+   return false;
+ 
+   return (ceil(log2(n)) == floor(log2(n)));
+}
+
 int main(){
      
     ios_base::sync_with_stdio(false);
@@ -119,34 +127,24 @@ int main(){
     #endif
 
     int T=0;cin>>T;
-
-   
     while(T--){
 
         
         int n =0;cin>>n;
-        vector<int>vec(n,0);
-        for(int i =0;i<n;i++){
-            cin>>vec[i];
-        }
-        int ans=0;
-        int val = vec[n-1];
-        int j =n-2;
-        int c=1;
-        while(j>=0){
-
-            if(vec[j]==val){
-                j--;
-                c++;
+        int mm=0;
+        vector<int> ans;
+        for(int i =1;i<=n-1;i++){
+            if(isPOfTwo(i)){
+                mm=i;
             }
-            else{
-                ans++;
-                j-=c;
-                c*=2;
+             ans.push_back(i);
+        }    
+        for(int i =0;i<ans.size();i++){
+            if(ans[i]==mm){
+                cout<<0<<" ";
             }
-
-        }
-        cout<<ans<<"\n";
-      
+            cout<<ans[i]<<" ";
+        }    
+        cout<<"\n";
     }
 }

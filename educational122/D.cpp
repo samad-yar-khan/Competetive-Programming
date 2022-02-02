@@ -125,6 +125,27 @@ ll gcd(ll a, ll b)
     return gcd(b % a, a);
 }
 
+ll sdp(vector<ll>&wts,vector<ll>&coins,int ind, int n , int k,vector<vector<int>>&dp){
+
+    // cout<<"hey";
+    if(ind >=n){
+        return 0;
+    }
+   
+    if(dp[ind][k]!=-1){
+        return dp[ind][k];
+    }
+    if(k<wts[ind]){
+        return sdp(wts,coins,ind+1,n,k,dp);
+    }
+
+    ll c1 = sdp(wts,coins,ind+1,n,k-wts[ind],dp) + coins[ind];
+    ll c2 = sdp(wts,coins,ind+1,n,k,dp);
+    dp[ind][k] = max(c1,c2);
+    return dp[ind][k];
+
+}
+
 
 int main(){
      
@@ -133,8 +154,19 @@ int main(){
     #ifndef ONLINE_JUDGE
         freopen("../input.txt", "r" , stdin);
         freopen("../output.txt", "w", stdout);
-    #endif
+    #endif  
 
+
+    vector<int>dp (2001,INT_MAX);
+    dp[0] = 0;
+    dp[1] = 0;
+    set<int>ss;
+    for(int i =1;i<=1000;i++){
+        for(int j=1;j<=i;j++){
+            ss.insert(i+i/j);
+            dp[i+i/j] = min(dp[i]+1,dp[i+i/j]);
+        }
+    }
     int T=0;cin>>T;
     while(T--){
         
@@ -142,14 +174,32 @@ int main(){
         ll n =0, k=0;
         cin>>n>>k;
         
-        vector<int>b(n,0);
-        vector<int>c(n,0);
+        vector<ll>b(n,0);
+        vector<ll>c(n,0);
+        vector<ll>steps(n,0);
+        ll allSteps=0;
         for(int i =0;i<n ;i++){
-            cin>>b[i];            
+            cin>>b[i]; 
+            steps[i] = dp[b[i]];
+            allSteps += b[i];          
         }
+        ll allCoins =0;
         for(int i =0;i<n ;i++){
             cin>>c[i];
+            allCoins+=c[i];
         }
+
+        if(k>=12*n){
+            cout<<allCoins<<'\n';
+            continue;
+        }
+     
+
+        vector<vector<int>> dp2(n, vector<int>(min(k,12*n)+1,-1));
+        // cout<<"hey";
+        cout<<sdp(steps,c,0,n,k,dp2)<<"\n";
+
+        
 
     }
 }

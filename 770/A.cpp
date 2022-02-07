@@ -7,11 +7,11 @@ using namespace std;
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 long long const modVal = 1000000007;
-
+ 
 // int binarySearch(vector<ll> vec,ll si , ll ei ,  ll t){
-
+ 
 //     while(si<=ei){
-
+ 
 //         ll mid = (si+ei)/2;
 //         if(vec[mid] == t){
 //             return mid;
@@ -23,15 +23,15 @@ long long const modVal = 1000000007;
 //                 si=mid+1;
 //             }
 //         }
-
+ 
 //     }
-
+ 
 //     return -1;
-
+ 
 // }
-
+ 
 // int power( int n , int k){
-
+ 
 //     int a = n;
 //     int ans = 1;
 //     while(k>0){
@@ -41,11 +41,11 @@ long long const modVal = 1000000007;
 //         k=k>>1;
 //         a=a*a;
 //     }
-
+ 
 //     return ans;
-
+ 
 // }
-
+ 
 // int KthRoot(int n , int k){
 //     int si = 1;
 //     int ei = n;
@@ -61,7 +61,7 @@ long long const modVal = 1000000007;
 //         if( value == n){
 //             return mid;
 //         }
-
+ 
 //         if(value<=n ){
 //             si=mid+1;
 //             ans=max(mid,ans);
@@ -72,11 +72,11 @@ long long const modVal = 1000000007;
 //     return ans;
 // }
 // void makeSeive(vector<bool>&seive , int range , vector<int>& primes ){
-
+ 
 //     seive[0] = 0 ;//np
 //     seive[1] = 0 ;//np
 //     seive[2] = 1 ;//pr
-
+ 
 //     for(long long i=2 ; i <= range ; i++){
 //         if(seive[i]){
 //             primes.push_back(i);
@@ -92,7 +92,7 @@ long long const modVal = 1000000007;
 //         return b;
 //     return gcd(b % a, a);
 // }
-
+ 
 // void print(vector<ll>&vec){
 //     for(auto i:vec) cout<<i<<" ";
 //     cout<<"\n";
@@ -113,14 +113,14 @@ long long const modVal = 1000000007;
 //         cout<<"\n";
 //     }
 // }
-void print(vector<vector<int>>&vec){
-    for(int i =0;i<vec.size();i++){
-        for(int j =0;j<vec[i].size();j++){
-            cout<<vec[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
-}
+// void print(vector<vector<ll>>&vec){
+//     for(int i =0;i<vec.size();i++){
+//         for(int j =0;j<vec[i].size();j++){
+//             cout<<vec[i][j]<<" ";
+//         }
+//         cout<<"\n";
+//     }
+// }
 // void print(vector<vector<string>>&vec){
 //     for(int i =0;i<vec.size();i++){
 //         for(int j =0;j<vec[i].size();j++){
@@ -129,10 +129,10 @@ void print(vector<vector<int>>&vec){
 //         cout<<"\n";
 //     }
 // }
-
-
+ 
+ 
 bool isPal(string &s){
-
+ 
     int si=0;int ei=s.length()-1;
     while(si<ei){
         if(s[si]!=s[ei]){
@@ -140,12 +140,12 @@ bool isPal(string &s){
         }
         si++;ei--;
     }
-
+ 
     return true;
-
-
+ 
+ 
 }
-
+ 
 int main(){
      
     ios_base::sync_with_stdio(false);
@@ -154,62 +154,26 @@ int main(){
         freopen("../input.txt", "r" , stdin);
         freopen("../output.txt", "w", stdout);
     #endif
-
+ 
     int T=0;cin>>T;
-
+ 
    
     while(T--){
-        
-        int n =0, k=0;
+        int n=0,k=0;
         cin>>n>>k;
-        int maxV = n*k;
-        vector<vector<int>>mat;
-
-        int i =1;
-        int total=0;
-        while(i<=maxV){
-
-            vector<int> rows;
-            int j=i;
-            int c=0;
-            while(c < k && j<=maxV){
-                c++;
-                rows.push_back(j);
-                j+=2;
-            }
-            total+=c;
-            i=j;
-            mat.push_back(rows);
-        }
-        bool lost=false;
-         i =2;
-        while(i<=maxV){
-
-            vector<int> rows;
-            int j=i;
-            int c=0;
-            while(c < k && j<=maxV){
-                c++;
-                rows.push_back(j);
-                j+=2;
-            }
-            if(c<k){
-                lost=true;
-            }
-            total+=c;
-            mat.push_back(rows);
-            i=j;
-        }   
-
-        if(lost){
-            cout<<"NO\n";
+        string s;cin>>s;
+ 
+        if(k==0){
+            cout<<1<<"\n";
             continue;
         }
-
-        cout<<"YES\n";
-        print(mat);
-
-        
+        if(isPal(s)){
+            cout<<1<<"\n";
+            continue;
+        }
+ 
+        cout<<2<<"\n";
+      
       
     }
 }

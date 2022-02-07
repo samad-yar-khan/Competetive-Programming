@@ -164,11 +164,51 @@ int main(){
         cin>>n>>x>>y;
 
         vector<ll>nums(n,0);
+        ll sum =0;
         for(int i = 0 ; i < n ;i++){
             cin>>nums[i];
+            sum+=nums[i];
         }
 
+        //the crux of the problem is that the parity of the last bit
+        //of x and x+3 will be diffrent
+        //if we just notice the last bit, then , the sum or xor will be same.
+
+        // 1+1 = 0 (ignore carry)
+        // 1+0 = 1;
+        // 0 + 0 = 0
+        // 0+1= 1
+
+        //1^1 = 0
+        //0^0 = 0;
+        //1^0 = 1;
+        //0^1 = 1
+
+        //so we take the sums + x , see the last bit and it should be equal to last bit of y
+        //it will be diff from the last bit of (x+3+sum) and last bit of y 
+
+        if((sum+x)%2 == (y)%2){
+            cout<<"Alice\n";
+        }else{
+            cout<<"Bob\n";
+        }
+ 
         
       
     }
 }
+/*
+7 111
+2 010
+
+10 1010
+12 1100
+8 1000
+
+9 1001
+5 0101
+
+
+
+
+*/

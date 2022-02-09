@@ -142,48 +142,45 @@ int main(){
 
     int T=0;cin>>T;
 
-   
     while(T--){
 
-        ll a =0,b=0;
-        cin>>a>>b;
-        string s;cin>>s;
-        int i =0;
-        while(i<s.length() && s[i]=='0'){
-            i++;
+        int n=0;
+        cin>>n;
+        vector<int>vec(n+1,0);
+        vector<int>changed(n+1,0);
+        for(int i =0; i<n ;i++){
+            cin>>vec[i];
         }
-        int  j=s.length()-1;
-        while (j>i && s[j]=='0')
-        {
-            j--;
+        bool won=true; 
+        for(int i =0;i<n-1;i++){
+            if(vec[i]>vec[i+1]){
+                won=false;
+            }
         }
 
-        int c1=0;
-        vector<ll>vec;
-        while(i<=j){
-            if(s[i] == '1'){
-                i++;
-                c1++;
-                continue;
+        if(won){
+            cout<<"YES\n";continue;
+        }
+        won = true;
+        int currChanges=0;
+        for(int i =1;i<n;i++){
+            if(vec[i]-changed[i-1]<0){
+                won = false;
+                break;
             }
-            int k=i;
-            while(k<s.length() && s[k]=='0'){
-                k++;
+            if(vec[i]-changed[i-1] > vec[i-1]-changed[i-1]){
+                changed[i]=vec[i]-vec[i-1]+changed[i-1];
+            }else{
+                changed[i] = changed[i-1];
             }
-            vec.push_back(k-i);
-            i=k;
         }
         
-        
-        ll ans = 0;
-        if(c1!=0){
-            ans+=a;
-        } 
-        for(int i =0;i<vec.size();i++){
-            ans+=(min(vec[i]*b,a));
-            // cout<<vec[i]<<" ";
+        if(won){
+            cout<<"YES\n";continue;
+        }else{
+            cout<<"NO\n";
         }
-        cout<<ans<<'\n';
-      
+
+
     }
 }

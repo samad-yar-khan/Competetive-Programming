@@ -159,21 +159,46 @@ int main(){
  
    
     while(T--){
-        int n=0,k=0;
-        cin>>n>>k;
+        
         string s;cin>>s;
- 
-        if(k==0){
-            cout<<1<<"\n";
-            continue;
+        int x=0;cin>>x;
+        int n =s.length();
+        string ans(n,'1');
+        for(int i =0;i< n ;i++){
+            if(s[i] == '0'){
+                int l = i-x;
+                int r = i+ x;
+                if(l>=0){
+                    ans[l] = '0';
+                }
+                if(r<n){
+                    ans[r] = '0';
+                }
+            }
         }
-        if(isPal(s)){
-            cout<<1<<"\n";
-            continue;
+        string aa(n,'0');
+        for(int i =0;i< n ;i++){
+            
+                int l = i-x;
+                int r = i+ x;
+                int vl=0;
+                int vr=0;
+                if(l>=0){
+                    vl = ans[l]-'0';
+                }
+                if(r<n){
+                    vr = ans[r]- '0';
+                }
+                int fv = vr|vl;
+
+                aa[i] = '0' + fv ;
+            
         }
- 
-        cout<<2<<"\n";
-      
+        if(aa!=s){
+            cout<<-1<<"\n";
+        }else{
+            cout<<ans<<"\n";
+        }
       
     }
 }

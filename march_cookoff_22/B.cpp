@@ -162,32 +162,14 @@ int main(){
         
         int n =0;cin>>n;
         vector<int>vec(n,0);
+        int z =0;
         for(int i =0;i<n;i++){
             cin>>vec[i];
-        }
-        sort(vec.begin(),vec.end());
-        int currAns = -1;
-        int currN =0;
-        int ind =0;
-        if(vec[0]!=0){
-            cout<<n<<"\n";
-            continue;
-        }
-        while(ind < n){
-            if(vec[ind]!=currN){
-                break;
+            if(vec[i] == 0){
+                z++;
             }
-            int c =0;
-            int i = ind;
-            while(i < n && vec[i]==vec[ind]){
-                i++;
-                c++;
-            }
-            ind =i;
-            currAns=max(currAns,c);
-            currN++;
         }
-        cout<<currAns<<"\n";
+        cout<<max(z,n-z)<<"\n";
       
     }
 }

@@ -6,7 +6,7 @@ using namespace std;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
-long long const modVal = 998244353;
+long long const modVal = 1000000007;
 
 // int binarySearch(vector<ll> vec,ll si , ll ei ,  ll t){
 
@@ -105,6 +105,14 @@ long long const modVal = 998244353;
 //     for(auto i:vec) cout<<i<<" ";
 //     cout<<"\n";
 // }
+// void print(vector<vector<int>>&vec){
+//     for(int i =0;i<vec.size();i++){
+//         for(int j =0;j<vec[i].size();j++){
+//             cout<<vec[i][j]<<" ";
+//         }
+//         cout<<"\n";
+//     }
+// }
 void print(vector<vector<int>>&vec){
     for(int i =0;i<vec.size();i++){
         for(int j =0;j<vec[i].size();j++){
@@ -113,7 +121,6 @@ void print(vector<vector<int>>&vec){
         cout<<"\n";
     }
 }
-
 // void print(vector<vector<string>>&vec){
 //     for(int i =0;i<vec.size();i++){
 //         for(int j =0;j<vec[i].size();j++){
@@ -147,8 +154,6 @@ ll q(int i , int j , int k){
 
 }
 
-
-
 int main(){
      
     ios_base::sync_with_stdio(false);
@@ -161,44 +166,48 @@ int main(){
 
     int T=0;cin>>T;
 
-
     while(T--){
         
-       int n =0 , m =0;cin>>n>>m;
-       string s;
-       vector<string>vec(n, s);
-        for(int i =0;i<n;i++){
-            cin>>vec[i];
-        }
-        if(vec[0][0] == '1'){
-            cout<<-1<<"\n";
-            continue;
+        int n =0,m=0;cin>>n>>m;
+        vector<string>g(n,string(m,'\0'));
+        for(int i=0;i<n;i++){
+            cin>>g[i];
         }
 
-        vector<vector<int>> ans;
-        for(int i =n-1;i>=0;i--){
-            for(int j = m-1;j>=0;j--){
+       for(int j =0;j<m;j++){
 
-                if(vec[i][j] == '1'){
-                    vector<int> row;
-                    if(j==0){
-                        row.push_back(i);
-                        row.push_back(j+1);
-                        row.push_back(i+1);
-                        row.push_back(j+1);
-                    }else{
-                        row.push_back(i+1);
-                        row.push_back(j);
-                        row.push_back(i+1);
-                        row.push_back(j+1);
-                    }
-                    ans.push_back(row);
+            int i =n-1;
+            while(i>=0){
+                int stones =0;
+                if(g[i][j] == 'o'){
+                    i--;
+                    continue;
                 }
-
+                int k =i;
+                while(k>=0 && g[k][j]!='o'){
+                    if(g[k][j] == '*'){
+                        stones++;
+                    }
+                    k--;
+                }
+                int st =i;
+                while(st>=0 && st>k){
+                    if(stones){
+                        g[st][j] = '*';
+                        stones--;
+                    }else{
+                        g[st][j] = '.';
+                    }
+                    st--;
+                }
+                i=k;
             }
+
         }
-        cout<<ans.size()<<"\n";
-        print(ans);
-      
+        for(int i =0;i<n;i++){
+            cout<<g[i]<<"\n";
+        }
+       
+
     }
 }

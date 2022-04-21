@@ -164,41 +164,18 @@ int main(){
 
     while(T--){
         
-       int n =0 , m =0;cin>>n>>m;
-       string s;
-       vector<string>vec(n, s);
+       int n =0 ;cin>>n;
+        vector<int>a(n,0);
+        vector<int>b(n,0);
+
         for(int i =0;i<n;i++){
-            cin>>vec[i];
+            cin>>a[i];
         }
-        if(vec[0][0] == '1'){
-            cout<<-1<<"\n";
-            continue;
+        for(int i =0;i<n;i++){
+            cin>>b[i];
         }
 
-        vector<vector<int>> ans;
-        for(int i =n-1;i>=0;i--){
-            for(int j = m-1;j>=0;j--){
 
-                if(vec[i][j] == '1'){
-                    vector<int> row;
-                    if(j==0){
-                        row.push_back(i);
-                        row.push_back(j+1);
-                        row.push_back(i+1);
-                        row.push_back(j+1);
-                    }else{
-                        row.push_back(i+1);
-                        row.push_back(j);
-                        row.push_back(i+1);
-                        row.push_back(j+1);
-                    }
-                    ans.push_back(row);
-                }
-
-            }
-        }
-        cout<<ans.size()<<"\n";
-        print(ans);
-      
     }
+
 }

@@ -7,7 +7,7 @@ using namespace std;
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 long long const modVal = 1000000007;
-//https://codeforces.com/contest/1504/problem/C
+
 // int binarySearch(vector<ll> vec,ll si , ll ei ,  ll t){
 
 //     while(si<=ei){
@@ -163,20 +163,160 @@ int main(){
         freopen("../input.txt", "r" , stdin);
         freopen("../output.txt", "w", stdout);
     #endif
-
+ 
     int T=0;cin>>T;
-
+ 
     while(T--){
         
-        int n =0;cin>>n;
-        string s;
-        cin>>s;
-        if(s[0] == '0' || s[n-1] == '0'){
-            cout<<"No\n";
+        
+        int n =0,m=0;cin>>n>>m;
+        vector<vector<int>>mat(n,vector<int>(m,0));
+        for(int i =0;i<n;i++){
+            for(int j =0;j<m;j++){
+                cin>>mat[i][j];
+            }
+        }
+ 
+        vector<int>cols(m,0);
+        int fualts=0;
+        for(int i =0;i<n;i++){
+            for(int j =1;j<m;j++){
+                if(mat[i][j]<mat[i][j-1]){
+                    fualts++;
+                    cols[j]++;
+                    cols[j-1]++;
+                }
+            }
+        }
+        if(fualts == 0){
+            cout<<1<<" "<<1<<"\n";
             continue;
         }
-
+ 
+       
+        vector<pair<int,int>>p(m,make_pair(0,0));
+        for(int i =0;i<m;i++){
+            p[i] = make_pair(cols[i],i);
+        }
+        bool w=false;
+        vector<vector<int>>temp = mat;
+        sort(p.begin(),p.end(),greater<pair<int,int>>());
+        for(int i =0 ;i<6 && i<m;i++){
+            for(int j =i+1;j<6 && j<m;j++){
+              
+                for(int x =0;x<n;x++){
+                    swap(temp[x][p[i].second],temp[x][p[j].second]);
+                }
+                 fualts=0;
+                for(int ii =0;ii<n;ii++){
+                    for(int jj =1;jj<m;jj++){
+                        if(temp[ii][jj]<temp[ii][jj-1]){
+                            fualts++;
+                        }
+                    }
+                }
+                if(fualts ==0){
+                   cout<<min(p[i].second,p[j].second)+1<<" "<<max(p[i].second,p[j].second)+1<<"\n";
+                   w=true;
+                   break;
+                }
+                for(int x =0;x<n;x++){
+                    swap(temp[x][p[i].second],temp[x][p[j].second]);
+                }
+ 
+            }
+            if(w){
+                break;
+            }
+        }
+        if(!w){
+            cout<<-1<<"\n";
+        }
+       
+ 
+ 
         
-
+      
     }
 }
+
+// int main(){
+     
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);cout.tie(NULL);
+//     fflush(stdout);
+//     #ifndef ONLINE_JUDGE
+//         freopen("../input.txt", "r" , stdin);
+//         freopen("../output.txt", "w", stdout);
+//     #endif
+
+//     int T=0;cin>>T;
+
+//     while(T--){
+        
+        
+//         int n =0,m=0;cin>>n>>m;
+//         vector<vector<int>>mat(n,vector<int>(m,0));
+//           vector<vector<pair<int,int>>>pm(n,vector<pair<int,int>>(m,{0,0}));
+//         for(int i =0;i<n;i++){
+//             for(int j =0;j<m;j++){
+//                 cin>>mat[i][j];
+//                 pm[i][j] = make_pair(mat[i][j],j);
+//             }
+//         }
+//         for(int i =0;i<n;i++){
+//             stable_sort(pm[i].begin(),pm[i].end());
+//         }
+
+      
+
+//         vector<int>cols(m,0);
+//         int fualts=0;
+//         for(int i =0;i<n;i++){
+//             for(int j =1;j<m;j++){
+//                 if(mat[i][j]<mat[i][j-1]){
+//                     fualts++;
+//                     cols[j]++;
+//                     cols[j-1]++;
+//                 }
+//             }
+//         }
+//         if(fualts == 0){
+//             cout<<1<<" "<<1<<"\n";
+//             continue;
+//         }
+//         for(int i =0;i<n;i++){
+//             for(int j=0;j<m;j++){
+
+//             }
+//         }
+
+       
+        
+//         bool w=false;
+      
+        
+//         if(!w){
+//             cout<<-1<<"\n";
+//         }
+
+ 
+        
+      
+//     }
+// }
+/*
+7 111
+2 010
+
+10 1010
+12 1100
+8 1000
+
+9 1001
+5 0101
+
+
+
+
+*/

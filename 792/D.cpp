@@ -7,7 +7,7 @@ using namespace std;
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 long long const modVal = 1000000007;
-//https://codeforces.com/contest/1504/problem/C
+
 // int binarySearch(vector<ll> vec,ll si , ll ei ,  ll t){
 
 //     while(si<=ei){
@@ -153,6 +153,20 @@ ll q(int i , int j , int k){
     return res;
 
 }
+class compare{
+
+    public:
+
+    bool operator()(pair<int,int>&p1 , pair<int,int>&p2){
+        if(p1.first<p2.first){
+            return true;
+        }
+        if(p1.first==p2.first){
+            return p1.second>p2.second;
+        }
+        return false;
+    }
+};
 
 int main(){
      
@@ -163,20 +177,39 @@ int main(){
         freopen("../input.txt", "r" , stdin);
         freopen("../output.txt", "w", stdout);
     #endif
-
+ 
     int T=0;cin>>T;
 
+ 
     while(T--){
         
-        int n =0;cin>>n;
-        string s;
-        cin>>s;
-        if(s[0] == '0' || s[n-1] == '0'){
-            cout<<"No\n";
-            continue;
+        int n =0,k=0;cin>>n>>k;
+        vector<ll>vec(n,0);
+        for(int i = 0 ; i < n ; i ++){
+            cin>>vec[i];
+        }
+        priority_queue<pair<int,int>,vector<pair<int,int>>,compare>pq;
+        pq.push({vec[0],0});
+        for(int i =1;i<n ;i++){
+            pq.push({vec[i]+1,i});
         }
 
-        
-
+        vector<bool>j(n,false);
+        while(k >0 && pq.size()>0){
+            pair<int,int>p = pq.top();pq.pop();
+            k--;
+            j[p.second]=true;
+        }
+        int x=0;
+        ll d=0;
+        for(int i =0;i<n;i++){
+            if(j[i]){
+                x++;
+            }else{
+                d++;
+                d += vec[i];
+            }
+        }
+        cout<<d<<"\n";
     }
 }

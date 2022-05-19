@@ -7,7 +7,7 @@ using namespace std;
 using namespace __gnu_pbds;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 long long const modVal = 1000000007;
-//https://codeforces.com/contest/1504/problem/C
+
 // int binarySearch(vector<ll> vec,ll si , ll ei ,  ll t){
 
 //     while(si<=ei){
@@ -168,15 +168,42 @@ int main(){
 
     while(T--){
         
-        int n =0;cin>>n;
-        string s;
-        cin>>s;
-        if(s[0] == '0' || s[n-1] == '0'){
-            cout<<"No\n";
-            continue;
-        }
+        
+        ll a=0,b=0,c=0;
+        cin>>a>>b>>c;
 
+        ll z = c;
+        bool fx =0;
+        ll y = c+b;
+        ll m = (c-a)/y;
+        if((c-a)%y > 0){
+            m++;
+        }
+        if(m<0){
+            m = 1;
+        }
+        ll x = m*y +a;
+        cout<<x<<" "<<y<<" "<<z<<"\n";
+
+       
+        
         
 
+      
     }
 }
+/*
+7 111
+2 010
+
+10 1010
+12 1100
+8 1000
+
+9 1001
+5 0101
+
+
+
+
+*/
